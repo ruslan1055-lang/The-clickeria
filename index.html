@@ -269,7 +269,7 @@
 <meta name="apple-mobile-web-app-title" content="Diamond Clicker">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#060b14">
-<title>💎 Diamond Clicker</title>
+<title>🪐 The Clickeria</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Lilita+One&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -2790,71 +2790,85 @@ body[class*="free-theme-"] #bonusTab1 {
 .level-up-popup .lup-sub   { font-size: 13px; font-weight: 800; color: rgba(255,255,255,0.75); margin-bottom: 8px; }
 .level-up-popup .lup-reward{ font-size: 22px; font-weight: 900; color: var(--blue); text-shadow: 0 0 14px rgba(0,200,255,0.7); }
 
-/* ===== LOADING SCREEN: Арбузное лето ===== */
+/* ===== LOADING SCREEN: The Clickeria — Вселенная ===== */
 #loading-screen{position:fixed;inset:0;z-index:99999;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  background:linear-gradient(180deg,#14bfd6 0%,#6fe0d0 38%,#c8f2c2 70%,#fff1b0 100%);
-  transition:opacity .9s ease,visibility .9s ease;font-family:'Nunito',sans-serif}
-#loading-screen.hide{opacity:0;visibility:hidden;pointer-events:none}
-.ls-sun{position:absolute;top:-110px;right:-110px;width:280px;height:280px;border-radius:50%;z-index:1;
-  background:radial-gradient(circle at 40% 40%,#fff8c9,#ffd23f 55%,#ffb21f);box-shadow:0 0 90px 30px rgba(255,214,70,.55)}
-.ls-rays{position:absolute;top:-330px;right:-330px;width:720px;height:720px;border-radius:50%;z-index:1;
-  background:repeating-conic-gradient(rgba(255,255,255,.38) 0 7deg,transparent 7deg 22deg);
-  -webkit-mask-image:radial-gradient(circle,#000 18%,transparent 68%);mask-image:radial-gradient(circle,#000 18%,transparent 68%);
-  animation:lsSpin 50s linear infinite}
-@keyframes lsSpin{to{transform:rotate(360deg)}}
+  background:radial-gradient(120% 90% at 50% 0%,#1b1146 0%,#0b0a2a 45%,#04030f 100%);
+  transition:opacity .9s ease,visibility .9s ease,transform .9s ease;font-family:'Nunito',sans-serif;color:#fff}
+#loading-screen.hide{opacity:0;visibility:hidden;pointer-events:none;transform:scale(1.12)}
 
-.ls-floats{position:absolute;inset:0;pointer-events:none;z-index:1}
-.ls-fl{position:absolute;bottom:-50px;left:var(--x);font-size:var(--fs);opacity:.55;will-change:transform;
+.ls-nebula{position:absolute;inset:-20%;z-index:0;pointer-events:none;filter:blur(40px);opacity:.75;
+  background:radial-gradient(40% 35% at 20% 25%,rgba(140,70,255,.55),transparent 70%),
+             radial-gradient(38% 32% at 82% 70%,rgba(0,190,255,.42),transparent 70%),
+             radial-gradient(34% 30% at 70% 15%,rgba(255,70,170,.34),transparent 70%),
+             radial-gradient(40% 30% at 25% 85%,rgba(60,90,255,.4),transparent 70%);
+  animation:lsNeb 26s ease-in-out infinite alternate}
+@keyframes lsNeb{0%{transform:translate(-2%,-1%) rotate(0) scale(1)}100%{transform:translate(3%,2%) rotate(8deg) scale(1.12)}}
+
+.ls-stars{position:absolute;inset:0;z-index:1;pointer-events:none}
+.ls-star-layer{position:absolute;left:0;top:0;width:1px;height:1px;border-radius:50%;background:transparent;animation:lsTwinkle var(--tw) ease-in-out infinite alternate}
+.ls-star-layer::after{content:'';position:absolute;left:0;top:-100vh;width:inherit;height:inherit;border-radius:50%;box-shadow:var(--sh2)}
+@keyframes lsTwinkle{0%{opacity:.35}100%{opacity:1}}
+.ls-star-layer.drift{animation:lsTwinkle var(--tw) ease-in-out infinite alternate,lsDrift var(--dr) linear infinite}
+@keyframes lsDrift{to{transform:translateY(100vh)}}
+
+.ls-shoot{position:absolute;z-index:2;width:130px;height:2px;border-radius:2px;pointer-events:none;opacity:0;
+  background:linear-gradient(90deg,rgba(255,255,255,0),#bfe9ff 70%,#fff);transform:rotate(var(--a));
+  animation:lsShoot 6s linear var(--dl) infinite}
+@keyframes lsShoot{0%{opacity:0;transform:rotate(var(--a)) translateX(0)}3%{opacity:1}
+  14%{opacity:0;transform:rotate(var(--a)) translateX(360px)}100%{opacity:0;transform:rotate(var(--a)) translateX(360px)}}
+
+.ls-floats{position:absolute;inset:0;pointer-events:none;z-index:2}
+.ls-fl{position:absolute;bottom:-50px;left:var(--x);font-size:var(--fs);opacity:.5;will-change:transform;filter:drop-shadow(0 0 8px rgba(120,180,255,.6));
   animation:lsRise var(--d) linear var(--dl) infinite}
 @keyframes lsRise{0%{transform:translate(0,0) rotate(0)}100%{transform:translate(var(--sx),-118vh) rotate(var(--r))}}
 
-.ls-waves{position:absolute;left:0;right:0;bottom:0;height:100px;z-index:2;pointer-events:none}
-.ls-wave{position:absolute;left:0;bottom:0;width:200%;display:flex;animation:lsWave var(--s) linear infinite;will-change:transform}
-.ls-wave svg{width:50%;height:100%;display:block}
-@keyframes lsWave{to{transform:translateX(-50%)}}
+.ls-stage{position:relative;z-index:5;display:flex;flex-direction:column;align-items:center;padding-bottom:30px}
 
-.ls-stage{position:relative;z-index:5;display:flex;flex-direction:column;align-items:center;padding-bottom:64px}
-.ls-slice-wrap{width:232px;animation:lsBob 3.6s ease-in-out 1.2s infinite}
-.ls-slice{display:block;width:100%;height:auto;transform-origin:50% 70%;
-  filter:drop-shadow(0 7px 0 rgba(11,77,46,.25));animation:lsDrop 1s cubic-bezier(.3,1.45,.5,1) .1s both}
-@keyframes lsDrop{0%{opacity:0;transform:translateY(-150px) rotate(-30deg) scale(.7)}
-  55%{opacity:1;transform:translateY(8px) rotate(4deg) scale(1.06,.94)}
-  75%{transform:translateY(-4px) rotate(-2deg) scale(.98,1.03)}100%{opacity:1;transform:none}}
-@keyframes lsBob{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-9px) rotate(1.5deg)}}
-.ls-slice-wrap.pop{animation:lsPop .5s ease-out both}
-@keyframes lsPop{0%{transform:scale(1)}40%{transform:scale(1.14) rotate(-3deg)}100%{transform:scale(1)}}
-.ls-shadow{width:150px;height:14px;margin-top:8px;border-radius:50%;
-  background:radial-gradient(ellipse,rgba(11,77,46,.32),transparent 70%);animation:lsShadow 3.6s ease-in-out 1.2s infinite}
-@keyframes lsShadow{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.82)}}
-.ls-gem{transform-box:fill-box;transform-origin:center;animation:lsGem 2.6s ease-in-out var(--g) infinite}
-@keyframes lsGem{0%,100%{transform:scale(1)}50%{transform:scale(1.28)}}
+.ls-planet-wrap{position:relative;width:250px;height:210px;animation:lsBob 5s ease-in-out 1.2s infinite}
+.ls-planet-wrap.pop{animation:lsPop .6s ease-out both}
+@keyframes lsBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes lsPop{0%{transform:scale(1)}40%{transform:scale(1.18)}100%{transform:scale(1)}}
+.ls-planet{position:relative;z-index:2;display:block;width:100%;height:100%;overflow:visible;animation:lsIn 1.1s cubic-bezier(.2,1.3,.4,1) .1s both}
+@keyframes lsIn{0%{opacity:0;transform:scale(.2) rotate(-40deg)}100%{opacity:1;transform:none}}
+.ls-glow{position:absolute;left:50%;top:50%;width:230px;height:230px;margin:-115px 0 0 -115px;border-radius:50%;z-index:0;
+  background:radial-gradient(circle,rgba(120,90,255,.55),rgba(0,200,255,.18) 50%,transparent 70%);animation:lsGlow 2.4s ease-in-out infinite}
+@keyframes lsGlow{0%,100%{transform:scale(.9);opacity:.7}50%{transform:scale(1.15);opacity:1}}
+.ls-ripple{position:absolute;left:50%;top:50%;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;z-index:1;
+  border:2px solid rgba(120,220,255,.7);opacity:0;animation:lsRipple 3s ease-out calc(var(--k) * 1s) infinite}
+@keyframes lsRipple{0%{transform:scale(.8);opacity:.8}100%{transform:scale(2.3);opacity:0}}
+.ls-orbit{transform-box:fill-box;transform-origin:center}
+.ls-ring-spin{animation:lsPulseRing 3s ease-in-out infinite}
+@keyframes lsPulseRing{0%,100%{opacity:.85}50%{opacity:1}}
+.ls-moon{animation:lsTwinkle 1.3s ease-in-out infinite alternate}
 
-.ls-title{display:flex;margin-top:14px}
-.ls-letter{display:block;font-family:'Lilita One','Nunito',sans-serif;font-size:clamp(36px,12vw,48px);line-height:1;letter-spacing:1px;color:#fff;
-  -webkit-text-stroke:7px #0b4d2e;paint-order:stroke fill;text-shadow:0 5px 0 #0b4d2e,0 10px 14px rgba(5,60,60,.35);
-  animation:lsLetter .6s cubic-bezier(.3,1.6,.5,1) calc(.9s + var(--i) * .09s) both}
-@keyframes lsLetter{0%{opacity:0;transform:translateY(-36px) scale(.5) rotate(-12deg)}100%{opacity:1;transform:none}}
-.ls-ribbon{margin-top:14px;padding:4px 22px 6px 28px;border-radius:12px;border:3px solid #fff;color:#fff;
-  background:linear-gradient(180deg,#ff5d7a,#ff2d55);font:22px/1 'Lilita One','Nunito',sans-serif;letter-spacing:6px;
-  box-shadow:0 4px 0 #b3123a,0 8px 14px rgba(5,60,60,.25);transform:rotate(-3deg);
-  animation:lsRibbon .6s cubic-bezier(.3,1.5,.5,1) 1.8s both}
-@keyframes lsRibbon{0%{opacity:0;transform:rotate(-3deg) scale(.4) translateY(-20px)}100%{opacity:1;transform:rotate(-3deg)}}
-.ls-welcome{margin-top:14px;font-size:14px;font-weight:800;letter-spacing:1px;color:rgba(11,77,46,.8);animation:lsFade .6s 2.2s both}
+.ls-kicker{margin-top:18px;font-size:13px;font-weight:900;letter-spacing:9px;padding-left:9px;color:#9ad8ff;text-shadow:0 0 12px rgba(0,190,255,.8);animation:lsFade .6s .9s both}
+.ls-title{display:flex;margin-top:4px}
+.ls-letter{display:block;font-family:'Lilita One','Nunito',sans-serif;font-size:clamp(32px,10.5vw,46px);line-height:1.1;letter-spacing:1px;
+  background:linear-gradient(180deg,#fff 10%,#b8e8ff 45%,#9d7bff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 10px rgba(130,110,255,.75)) drop-shadow(0 3px 0 rgba(10,5,60,.9));
+  animation:lsLetter .6s cubic-bezier(.3,1.6,.5,1) calc(1s + var(--i) * .08s) both}
+@keyframes lsLetter{0%{opacity:0;transform:translateY(-34px) scale(.4) rotate(-14deg)}100%{opacity:1;transform:none}}
+.ls-sub{margin-top:10px;font-size:14px;font-weight:800;letter-spacing:1px;color:rgba(200,220,255,.8);animation:lsFade .6s 2s both}
 @keyframes lsFade{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:none}}
 
-.ls-bar-wrap{width:240px;margin-top:24px;animation:lsFade .5s 2.3s both}
-.ls-bar-track{position:relative;height:20px;padding:3px;border-radius:14px;background:#0b4d2e;
-  box-shadow:inset 0 0 0 2px #2fb457,0 4px 0 rgba(11,77,46,.35)}
-.ls-bar-fill{position:relative;height:100%;width:0;border-radius:10px;
-  background:radial-gradient(circle,#3b0a18 0 1.6px,transparent 2.2px) 4px 3px/16px 11px,linear-gradient(180deg,#ff6b81,#ff2d55);
+.ls-bar-wrap{width:250px;margin-top:26px;animation:lsFade .5s 2.1s both}
+.ls-bar-track{position:relative;height:14px;padding:3px;border-radius:12px;background:rgba(10,8,40,.85);
+  box-shadow:inset 0 0 0 1.5px rgba(130,150,255,.5),0 0 18px rgba(100,80,255,.35)}
+.ls-bar-fill{position:relative;height:100%;width:0;border-radius:9px;
+  background:linear-gradient(90deg,#00c8ff,#7a5cff 60%,#ff5cc8);box-shadow:0 0 12px rgba(0,200,255,.8);
   transition:width .35s cubic-bezier(.4,0,.2,1)}
-.ls-bar-fill::before{content:'';position:absolute;left:5px;right:5px;top:2px;height:3px;border-radius:2px;background:rgba(255,255,255,.45)}
-.ls-bar-fill::after{content:'🍉';position:absolute;right:-13px;top:50%;margin-top:-13px;font-size:24px;line-height:1;animation:lsSpin 1.2s linear infinite}
-.ls-bar-text{margin-top:12px;min-height:18px;text-align:center;font-size:13px;font-weight:800;color:#0b4d2e}
+.ls-bar-fill::after{content:'✦';position:absolute;right:-11px;top:50%;margin-top:-12px;font-size:22px;line-height:1;color:#fff;
+  text-shadow:0 0 10px #8fe0ff,0 0 20px #7a5cff;animation:lsSpin 2s linear infinite}
+@keyframes lsSpin{to{transform:rotate(360deg)}}
+.ls-bar-meta{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:10px}
+.ls-bar-text{min-height:18px;font-size:12.5px;font-weight:800;color:#bcd2ff;text-align:left}
+.ls-pct{font-size:13px;font-weight:900;color:#8fe0ff;font-variant-numeric:tabular-nums;text-shadow:0 0 8px rgba(0,190,255,.6)}
 
 .ls-particle{position:absolute;pointer-events:none;z-index:6;animation:lsParticleFly var(--dur) ease-out forwards}
-.ls-particle.gem{border-radius:2px}
 @keyframes lsParticleFly{0%{transform:translate(0,0) scale(1) rotate(0);opacity:1}100%{transform:translate(var(--tx),var(--ty)) scale(.2) rotate(var(--rot));opacity:0}}
+.ls-flash{position:absolute;left:var(--cx);top:var(--cy);width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;z-index:6;pointer-events:none;
+  background:radial-gradient(circle,#fff,rgba(140,200,255,.6) 40%,transparent 70%);animation:lsFlash .9s ease-out forwards}
+@keyframes lsFlash{0%{transform:scale(1);opacity:1}100%{transform:scale(16);opacity:0}}
 
 @media (prefers-reduced-motion:reduce){
   #loading-screen *{animation-duration:.01ms !important;animation-iteration-count:1 !important;animation-delay:0s !important}
@@ -3138,49 +3152,65 @@ body[class*="free-theme-"] #bonusTab1 {
   </div>
 </div>
 
-<!-- ===== LOADING SCREEN: Арбузное лето ===== -->
+<!-- ===== LOADING SCREEN: The Clickeria — Вселенная ===== -->
 <div id="loading-screen">
-  <div class="ls-rays"></div>
-  <div class="ls-sun"></div>
+  <div class="ls-nebula"></div>
+  <div class="ls-stars" id="ls-stars"></div>
+  <div class="ls-shoot" style="top:14%;left:8%;--a:24deg;--dl:.6s"></div>
+  <div class="ls-shoot" style="top:40%;left:-4%;--a:18deg;--dl:3s"></div>
+  <div class="ls-shoot" style="top:6%;left:46%;--a:30deg;--dl:4.8s"></div>
   <div class="ls-floats" id="ls-floats"></div>
-  <div class="ls-waves">
-    <div class="ls-wave" style="--s:16s;height:100px;"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path fill="#4fd6dc" d="M0,60 C150,20 350,100 600,60 C850,20 1050,100 1200,60 L1200,120 L0,120 Z"/></svg><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path fill="#4fd6dc" d="M0,60 C150,20 350,100 600,60 C850,20 1050,100 1200,60 L1200,120 L0,120 Z"/></svg></div>
-    <div class="ls-wave" style="--s:11s;height:82px;animation-direction:reverse;"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path fill="#17b6cc" d="M0,60 C150,20 350,100 600,60 C850,20 1050,100 1200,60 L1200,120 L0,120 Z"/></svg><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path fill="#17b6cc" d="M0,60 C150,20 350,100 600,60 C850,20 1050,100 1200,60 L1200,120 L0,120 Z"/></svg></div>
-    <div class="ls-wave" style="--s:8s;height:58px;"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path fill="#0a93ad" d="M0,60 C150,20 350,100 600,60 C850,20 1050,100 1200,60 L1200,120 L0,120 Z"/></svg><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path fill="#0a93ad" d="M0,60 C150,20 350,100 600,60 C850,20 1050,100 1200,60 L1200,120 L0,120 Z"/></svg></div>
-  </div>
 
   <div class="ls-stage">
-    <div class="ls-slice-wrap" id="ls-slice">
-      <svg class="ls-slice" viewBox="8 10 224 120" aria-hidden="true">
+    <div class="ls-planet-wrap" id="ls-slice">
+      <div class="ls-glow"></div>
+      <div class="ls-ripple" style="--k:0"></div><div class="ls-ripple" style="--k:1"></div><div class="ls-ripple" style="--k:2"></div>
+      <svg class="ls-planet" viewBox="0 0 250 210" aria-hidden="true">
         <defs>
-          <linearGradient id="lsRind" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#34c15f"/><stop offset="1" stop-color="#136a38"/></linearGradient>
-          <radialGradient id="lsFlesh" cx="120" cy="20" r="84" gradientUnits="userSpaceOnUse">
-            <stop offset="0" stop-color="#ff2a52"/><stop offset=".72" stop-color="#ff4767"/><stop offset=".93" stop-color="#ff8fa3"/><stop offset="1" stop-color="#ffc9d3"/>
+          <radialGradient id="lsPl" cx="36%" cy="30%" r="80%">
+            <stop offset="0" stop-color="#d8f6ff"/><stop offset=".25" stop-color="#6fd0ff"/><stop offset=".6" stop-color="#6a4cff"/><stop offset="1" stop-color="#1a0f5e"/>
           </radialGradient>
-          <linearGradient id="lsGem" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d6f8ff"/><stop offset=".5" stop-color="#00c8ff"/><stop offset="1" stop-color="#0086c4"/></linearGradient>
-          <g id="lsGemShape">
-            <polygon points="-3.2,-7 3.2,-7 7.5,-2 0,8 -7.5,-2" fill="url(#lsGem)" stroke="#fff" stroke-width=".9" stroke-linejoin="round"/>
-            <path d="M-7.5,-2H7.5M-3.2,-7L-1.8,-2L0,8M3.2,-7L1.8,-2L0,8" fill="none" stroke="rgba(255,255,255,.75)" stroke-width=".6"/>
-          </g>
+          <linearGradient id="lsRing" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#ff7ad0"/><stop offset=".5" stop-color="#ffe2a8"/><stop offset="1" stop-color="#52d6ff"/>
+          </linearGradient>
+          <clipPath id="lsPlClip"><circle cx="125" cy="105" r="66"/></clipPath>
+          <radialGradient id="lsShade" cx="30%" cy="28%" r="85%"><stop offset=".5" stop-color="transparent"/><stop offset="1" stop-color="rgba(5,0,40,.65)"/></radialGradient>
         </defs>
-        <path d="M20,20 A100,100 0 0 0 220,20 Z" fill="url(#lsRind)" stroke="#136a38" stroke-width="6" stroke-linejoin="round"/>
-        <path d="M29,20 A91,91 0 0 0 211,20 Z" fill="#eafab8"/>
-        <path d="M36,20 A84,84 0 0 0 204,20 Z" fill="url(#lsFlesh)"/>
-        <path d="M50,42 A72,72 0 0 0 86,88" fill="none" stroke="#fff" stroke-opacity=".38" stroke-width="5" stroke-linecap="round"/>
-        <g transform="translate(152.8 42.9) rotate(-28) scale(1.3)"><g class="ls-gem" style="--g:0.00s"><use href="#lsGemShape"/></g></g><g transform="translate(120.0 60.0) rotate(0) scale(1.3)"><g class="ls-gem" style="--g:0.33s"><use href="#lsGemShape"/></g></g><g transform="translate(87.2 42.9) rotate(28) scale(1.3)"><g class="ls-gem" style="--g:0.66s"><use href="#lsGemShape"/></g></g><g transform="translate(177.5 43.2) rotate(-34) scale(1.3)"><g class="ls-gem" style="--g:0.99s"><use href="#lsGemShape"/></g></g><g transform="translate(152.9 72.6) rotate(-16) scale(1.3)"><g class="ls-gem" style="--g:1.32s"><use href="#lsGemShape"/></g></g><g transform="translate(120.0 82.0) rotate(0) scale(1.3)"><g class="ls-gem" style="--g:1.65s"><use href="#lsGemShape"/></g></g><g transform="translate(87.1 72.6) rotate(16) scale(1.3)"><g class="ls-gem" style="--g:1.98s"><use href="#lsGemShape"/></g></g><g transform="translate(62.5 43.2) rotate(34) scale(1.3)"><g class="ls-gem" style="--g:2.31s"><use href="#lsGemShape"/></g></g>
+        <g transform="rotate(-20 125 105)">
+          <path class="ls-ring-spin" d="M12,105 A113,32 0 0 1 238,105" fill="none" stroke="url(#lsRing)" stroke-width="9" stroke-linecap="round" opacity=".85"/>
+          <path d="M26,105 A99,26 0 0 1 224,105" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="2"/>
+        </g>
+        <circle cx="125" cy="105" r="66" fill="url(#lsPl)"/>
+        <g clip-path="url(#lsPlClip)">
+          <path d="M40,80 Q125,58 210,86 L210,98 Q125,74 40,94Z" fill="#fff" opacity=".13"/>
+          <path d="M40,112 Q125,92 210,118 L210,132 Q125,108 40,126Z" fill="#ff7ad0" opacity=".16"/>
+          <path d="M40,140 Q125,124 210,146 L210,156 Q125,138 40,152Z" fill="#fff" opacity=".1"/>
+          <circle cx="98" cy="128" r="9" fill="#2a1a8a" opacity=".35"/><circle cx="154" cy="82" r="6" fill="#2a1a8a" opacity=".3"/><circle cx="160" cy="132" r="4" fill="#2a1a8a" opacity=".3"/>
+          <circle cx="125" cy="105" r="66" fill="url(#lsShade)"/>
+        </g>
+        <path d="M70,70 A62,62 0 0 1 108,48" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="4" stroke-linecap="round"/>
+        <g transform="rotate(-20 125 105)">
+          <path class="ls-ring-spin" d="M12,105 A113,32 0 0 0 238,105" fill="none" stroke="url(#lsRing)" stroke-width="9" stroke-linecap="round"/>
+          <path d="M26,105 A99,26 0 0 0 224,105" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="2"/>
+          <circle r="6" fill="#fff"><animateMotion dur="5s" repeatCount="indefinite" path="M12,105 A113,32 0 1 0 238,105 A113,32 0 1 0 12,105"/></circle>
+          <circle r="11" fill="#8fe0ff" opacity=".35"><animateMotion dur="5s" repeatCount="indefinite" path="M12,105 A113,32 0 1 0 238,105 A113,32 0 1 0 12,105"/></circle>
+        </g>
+        <g class="ls-moon"><text x="205" y="40" font-size="16" fill="#fff">✦</text><text x="30" y="162" font-size="12" fill="#8fe0ff">✦</text><text x="216" y="170" font-size="10" fill="#ffb3e6">✦</text></g>
       </svg>
     </div>
-    <div class="ls-shadow"></div>
 
-    <div class="ls-title" aria-label="Diamond">
-      <span class="ls-letter" style="--i:0">D</span><span class="ls-letter" style="--i:1">I</span><span class="ls-letter" style="--i:2">A</span><span class="ls-letter" style="--i:3">M</span><span class="ls-letter" style="--i:4">O</span><span class="ls-letter" style="--i:5">N</span><span class="ls-letter" style="--i:6">D</span>
+    <div class="ls-kicker">THE</div>
+    <div class="ls-title" aria-label="Clickeria">
+      <span class="ls-letter" style="--i:0">C</span><span class="ls-letter" style="--i:1">L</span><span class="ls-letter" style="--i:2">I</span><span class="ls-letter" style="--i:3">C</span><span class="ls-letter" style="--i:4">K</span><span class="ls-letter" style="--i:5">E</span><span class="ls-letter" style="--i:6">R</span><span class="ls-letter" style="--i:7">I</span><span class="ls-letter" style="--i:8">A</span>
     </div>
-    <div class="ls-ribbon">CLICKER</div>
-    <div class="ls-welcome">Арбузное лето</div>
+    <div class="ls-sub">Кликай среди звёзд</div>
 
     <div class="ls-bar-wrap">
       <div class="ls-bar-track"><div class="ls-bar-fill" id="ls-bar"></div></div>
-      <div class="ls-bar-text" id="ls-text">Выбираем самый спелый…</div>
+      <div class="ls-bar-meta">
+        <div class="ls-bar-text" id="ls-text">Запускаем двигатели…</div>
+        <div class="ls-pct" id="ls-pct">0%</div>
+      </div>
     </div>
   </div>
 </div>
@@ -11957,34 +11987,56 @@ setTimeout(applyThemeToInlineButtons, 0);
 
 
 // ============================================================
-//  LOADING SCREEN
+//  LOADING SCREEN — The Clickeria (Вселенная)
 // ============================================================
 (function() {
   const screen = document.getElementById('loading-screen');
   const bar    = document.getElementById('ls-bar');
   const text   = document.getElementById('ls-text');
-  const slice  = document.getElementById('ls-slice');
+  const pct    = document.getElementById('ls-pct');
+  const planet = document.getElementById('ls-slice');
   const floats = document.getElementById('ls-floats');
+  const stars  = document.getElementById('ls-stars');
 
-  // Летние штуки, плывущие вверх за волнами
-  ['🍉','🌴','🧊','🍹','🍉','🕶️','💎','🍉','🍦'].forEach((e, i) => {
+  // Звёздное небо: 3 слоя разного размера, мерцание + медленный дрейф
+  function shadows(n, colors) {
+    const out = [];
+    for (let i = 0; i < n; i++) {
+      out.push(`${Math.round(Math.random() * 100)}vw ${Math.round(Math.random() * 100)}vh 0 0 ${colors[i % colors.length]}`);
+    }
+    return out.join(',');
+  }
+  [
+    { n: 70, size: 1, tw: 3.2, dr: 0,  c: ['#fff', '#cfe6ff', '#ffe9c9'] },
+    { n: 34, size: 2, tw: 2.4, dr: 140, c: ['#fff', '#9ad8ff', '#d9c6ff'] },
+    { n: 12, size: 3, tw: 1.8, dr: 90, c: ['#fff', '#8fe0ff', '#ffb3e6'] }
+  ].forEach(L => {
+    const el = document.createElement('div');
+    el.className = 'ls-star-layer' + (L.dr ? ' drift' : '');
+    const sh = shadows(L.n, L.c);
+    el.style.cssText = `width:${L.size}px;height:${L.size}px;box-shadow:${sh};--sh2:${sh};--tw:${L.tw}s;--dr:${L.dr}s;`;
+    stars.appendChild(el);
+  });
+
+  // Космические объекты, медленно плывущие вверх
+  ['🪐', '💎', '☄️', '🛰️', '✨', '🌙', '💫', '🚀', '⭐'].forEach((e, i) => {
     const s = document.createElement('span');
     s.className = 'ls-fl';
     s.textContent = e;
     s.style.cssText =
-      `--x:${(i * 10.5 + Math.random() * 5).toFixed(1)}%;--fs:${(18 + Math.random() * 16).toFixed(0)}px;` +
-      `--d:${(9 + Math.random() * 7).toFixed(1)}s;--dl:-${(Math.random() * 12).toFixed(1)}s;` +
+      `--x:${(i * 10.5 + Math.random() * 5).toFixed(1)}%;--fs:${(16 + Math.random() * 14).toFixed(0)}px;` +
+      `--d:${(12 + Math.random() * 9).toFixed(1)}s;--dl:-${(Math.random() * 14).toFixed(1)}s;` +
       `--sx:${(Math.random() * 60 - 30).toFixed(0)}px;--r:${(Math.random() * 360 - 180).toFixed(0)}deg`;
     floats.appendChild(s);
   });
 
   const steps = [
-    { pct: 10,  msg: 'Выбираем самый спелый…' },
-    { pct: 28,  msg: 'Режем на дольки…' },
-    { pct: 48,  msg: 'Достаём алмазные косточки…' },
-    { pct: 68,  msg: 'Охлаждаем во льду…' },
-    { pct: 85,  msg: 'Добавляем лета…' },
-    { pct: 100, msg: '🍉 Готово! Приятного!' },
+    { pct: 10,  msg: 'Запускаем двигатели…' },
+    { pct: 28,  msg: 'Раскрываем звёздные карты…' },
+    { pct: 48,  msg: 'Ловим первые клики галактики…' },
+    { pct: 68,  msg: 'Разгоняем туманности…' },
+    { pct: 85,  msg: 'Заряжаем кликовую энергию…' },
+    { pct: 100, msg: '✨ Готово! Добро пожаловать!' },
   ];
   let stepIdx = 0;
   const totalMs = 7000;
@@ -11994,11 +12046,12 @@ setTimeout(applyThemeToInlineButtons, 0);
     if (stepIdx >= steps.length) return;
     const step = steps[stepIdx++];
     bar.style.width = step.pct + '%';
+    pct.textContent = step.pct + '%';
     text.textContent = step.msg;
     if (stepIdx < steps.length) {
       setTimeout(runStep, stepMs);
     } else {
-      setTimeout(() => { slice.classList.add('pop'); spawnSplash(); }, 200);
+      setTimeout(() => { planet.classList.add('pop'); spawnSupernova(); }, 200);
       setTimeout(() => {
         screen.style.pointerEvents = 'none';
         screen.classList.add('hide');
@@ -12008,23 +12061,25 @@ setTimeout(applyThemeToInlineButtons, 0);
   }
   setTimeout(runStep, 120);
 
-  // Финал: брызги арбузного сока + алмазные искры
-  function spawnSplash() {
-    const r  = slice.getBoundingClientRect();
-    const cx = r.left + r.width / 2, cy = r.top + r.height * 0.4;
-    const juice = ['#ff2d55','#ff6b81','#ffc9d3','#34c15f','#ffd23f'];
-    for (let i = 0; i < 30; i++) {
+  // Финал: вспышка сверхновой + звёздные искры
+  function spawnSupernova() {
+    const r  = planet.getBoundingClientRect();
+    const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    const flash = document.createElement('div');
+    flash.className = 'ls-flash';
+    flash.style.cssText = `--cx:${cx}px;--cy:${cy}px;`;
+    screen.appendChild(flash);
+    const cols = ['#ffffff', '#8fe0ff', '#7a5cff', '#ff7ad0', '#ffe2a8'];
+    for (let i = 0; i < 36; i++) {
       const p = document.createElement('div');
-      const gem = i % 4 === 0;
-      const size  = gem ? Math.random() * 6 + 7 : Math.random() * 8 + 4;
+      const size  = Math.random() * 6 + 3;
       const angle = Math.random() * Math.PI * 2;
-      const dist  = Math.random() * 150 + 70;
-      p.className = 'ls-particle' + (gem ? ' gem' : '');
+      const dist  = Math.random() * 170 + 70;
+      const c = cols[i % cols.length];
+      p.className = 'ls-particle';
       p.style.cssText =
-        `width:${size}px;height:${size}px;left:${cx}px;top:${cy}px;` +
-        `background:${gem ? 'linear-gradient(135deg,#d6f8ff,#00c8ff)' : juice[i % juice.length]};` +
-        (gem ? '' : 'border-radius:50%;') +
-        `--tx:${Math.cos(angle) * dist}px;--ty:${Math.sin(angle) * dist - 30}px;` +
+        `width:${size}px;height:${size}px;left:${cx}px;top:${cy}px;background:${c};border-radius:50%;box-shadow:0 0 8px ${c};` +
+        `--tx:${Math.cos(angle) * dist}px;--ty:${Math.sin(angle) * dist}px;` +
         `--rot:${Math.random() * 360}deg;--dur:${(Math.random() * 0.4 + 0.45).toFixed(2)}s;`;
       screen.appendChild(p);
     }
